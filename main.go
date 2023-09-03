@@ -7,6 +7,7 @@ import (
 
 	"example.com/noman-ali/controllers"
 	"example.com/noman-ali/services"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -46,6 +47,11 @@ func init() {
 	us = services.NewUserService(userc, ctx)
 	uc = controllers.New(us)
 	server = gin.Default()
+	server.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:8080"},
+		AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders: []string{"Origin", "Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
+	}))
 }
 
 func main() {
