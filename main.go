@@ -33,7 +33,7 @@ func init() {
 	fmt.Println("MongoDB Atlas connection established")
 
 	// Update the database and collection names as needed.
-	userc := mongoclient.Database("<database_name>").Collection("users")
+	userc := mongoclient.Database("user_data").Collection("users")
 	us := services.NewUserService(userc, ctx)
 	uc := controllers.New(us)
 	server := gin.Default()
